@@ -1,0 +1,17 @@
+CREATE TABLE people
+(
+user_id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+name VARCHAR(255),
+busy BOOLEAN,
+present BOOLEAN,
+needs_break BOOLEAN,
+last_update TIMESTAMP
+);
+
+CREATE TABLE watching
+(
+id INTEGER NOT NULL PRIMARY KEY,
+watcher_id INTEGER NOT NULL,
+watched_id INTEGER NOT NULL,
+last_update	TIMESTAMP
+);

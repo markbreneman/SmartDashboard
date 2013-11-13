@@ -1,0 +1,63 @@
+body {
+	background: #ededed;
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+[class*="col-"] {
+}
+
+.thumbnail {
+	padding: 0;
+}
+
+.thumbnail > img {
+	margin: 0;
+}
+
+.caption {
+	display: inline-block;
+}
+
+.caption > p {
+	margin: 0 0 3px;
+}
+
+.indicator {
+	background: #ffbb00;
+	width: 10px;
+	height: 100%;
+	display: inline-block;
+	float:left;
+	height: 69px;
+}
+
+.name {
+	display: inline;
+}
+
+img.break {
+	position:relative; 
+	float:right; 
+	padding: 12px;
+}
+
+div.break {
+	box-shadow: 0px 0px 12px 3px rgba(147, 112, 219, .5);
+
+}
+
+.Free {
+	background: #78d80b;
+}
+
+.Busy {
+	background: #f35805;
+}
+
+.Break {
+	background: #d140ff;
+}
