@@ -22,11 +22,11 @@ int userState = 0;
 
 //The location to go to on the server
 //make sure to keep HTTP/1.0 at the end, this is telling it what type of file it is
-//String location = "/getstatus.php?id=1 HTTP/1.0";
-//String locationSetFree = "/setstatus.php?id=1&busy=0 HTTP/1.0";
-//String locationSetBusy = "/setstatus.php?id=1&busy=1 HTTP/1.0";
-//String locationSetNoBreak = "/setstatus.php?id=1&needsbreak=0 HTTP/1.0";
-//String locationSetNeedBreak = "/setstatus.php?id=1&needsbreak=1 HTTP/1.0";
+//String location = "/getstatus.php?id=4 HTTP/1.0";
+//String locationSetFree = "/setstatus.php?id=4&busy=0 HTTP/1.0";
+//String locationSetBusy = "/setstatus.php?id=4&busy=1 HTTP/1.0";
+//String locationSetNoBreak = "/setstatus.php?id=4&needsbreak=0 HTTP/1.0";
+//String locationSetNeedBreak = "/setstatus.php?id=4&needsbreak=1 HTTP/1.0";
 
 // if need to change the MAC address (Very Rare)
 //byte mac[] = { 
@@ -84,7 +84,7 @@ void loop() {
   }
 
   if (buttonStateAvail == HIGH) {     
-    client.get("192.168.1.94:8888/setstatus.php?id=1&busy=0");
+    client.get("192.168.1.94:8888/setstatus.php?id=4&busy=0");
     client.read();
     Serial.println("No Break Set");
     client.flush();
@@ -95,7 +95,7 @@ void loop() {
 
 
   if (buttonStateAvail == HIGH) {     
-    client.get("192.168.1.94:8888/setstatus.php?id=1&needsbreak=0");
+    client.get("192.168.1.94:8888/setstatus.php?id=4&needsbreak=0");
     client.read();
     Serial.println("Break Set");
     client.flush();
@@ -105,7 +105,7 @@ void loop() {
   }
 
   if (buttonStateBusy == HIGH) {     
-    client.get("192.168.1.94:8888/setstatus.php?id=1&busy=1");
+    client.get("192.168.1.94:8888/setstatus.php?id=4&busy=1");
     client.read();
     Serial.println("Busy Set");
     client.flush();
@@ -115,7 +115,7 @@ void loop() {
   }
 
   if (buttonStateBusy == HIGH) {     
-    client.get("192.168.1.94:8888/setstatus.php?id=1&needsbreak=0");
+    client.get("192.168.1.94:8888/setstatus.php?id=4&needsbreak=0");
     client.read();
     Serial.println("Busy Set");
     client.flush();
@@ -126,7 +126,7 @@ void loop() {
 
   if (buttonStateNeedBreak == HIGH) { 
 //    Serial.println("fired");   
-    client.get("192.168.1.94:8888/setstatus.php?id=1&needsbreak=1");
+    client.get("192.168.1.94:8888/setstatus.php?id=4&needsbreak=1");
     client.read();
     Serial.println("Need Break Set");
     client.flush();
@@ -141,7 +141,7 @@ String connectAndRead(){
   //connect to the server
   Serial.println("connecting...");
   //LETS NOT HARDCODE THIS LATER
-  client.get("192.168.1.94:8888/getstatus.php?id=1");
+  client.get("192.168.1.94:8888/getstatus.php?id=4");
 
   if(client.available()){
     return readPage();
