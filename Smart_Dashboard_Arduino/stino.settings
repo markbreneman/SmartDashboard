@@ -1,0 +1,9 @@
+{
+    "arduino_folder": "/Applications/Arduino.app", 
+    "board": 1, 
+    "build_folder": "/Users/mbreneman/Documents/Arduino_Build", 
+    "full_compilation": false, 
+    "platform": 1, 
+    "platform_name": "Arduino AVR Boards", 
+    "serial_port": 5
+}
