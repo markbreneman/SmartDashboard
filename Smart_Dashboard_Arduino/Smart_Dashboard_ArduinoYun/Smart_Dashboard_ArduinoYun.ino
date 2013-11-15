@@ -86,7 +86,7 @@ void loop() {
   }
 
   if (buttonStateAvail == HIGH) {     
-    client.get("192.168.1.139:8888/setstatus.php?id=3&busy=0");
+    client.get("66.39.3.7/~arthurn/yolo/setstatus.php?id=3&busy=0");
     client.read();
     Serial.println("No Break Set");
     client.flush();
@@ -97,7 +97,7 @@ void loop() {
 
 
   if (buttonStateAvail == HIGH) {     
-    client.get("192.168.1.139:8888/setstatus.php?id=3&needsbreak=0");
+    client.get("66.39.3.7/~arthurn/yolo/setstatus.php?id=3&needsbreak=0");
     client.read();
     Serial.println("Break Set");
     client.flush();
@@ -107,7 +107,7 @@ void loop() {
   }
 
   if (buttonStateBusy == HIGH) {     
-    client.get("192.168.1.139:8888/setstatus.php?id=3&busy=1");
+    client.get("66.39.3.7/~arthurn/yolo/setstatus.php?id=3&busy=1");
     client.read();
     Serial.println("Busy Set");
     client.flush();
@@ -117,7 +117,7 @@ void loop() {
   }
 
   if (buttonStateBusy == HIGH) {     
-    client.get("192.168.1.139:8888/setstatus.php?id=3&needsbreak=0");
+    client.get("66.39.3.7/~arthurn/yolo/setstatus.php?id=3&needsbreak=0");
     client.read();
     Serial.println("Busy Set");
     client.flush();
@@ -128,12 +128,12 @@ void loop() {
 
   if (buttonStateNeedBreak == HIGH) { 
 //    Serial.println("fired");   
-    client.get("192.168.1.139:8888/setstatus.php?id=3&needsbreak=1");
+    client.get("66.39.3.7/~arthurn/yolo/setstatus.php?id=3&needsbreak=1");
     client.read();
     Serial.println("Need Break Set");
     client.flush();
     
-    client.get("192.168.1.139:8888/sms.php?id=3");
+    client.get("66.39.3.7/~arthurn/yolo/sms.php?id=3");
     client.read();
     Serial.println("Text Sent");
     client.flush();
@@ -147,7 +147,7 @@ void loop() {
 String connectAndRead(){
   //connect to the server
   Serial.println("connecting...");
-  client.get("192.168.1.139:8888/getstatus.php?id=3");
+  client.get("66.39.3.7/~arthurn/yolo/getstatus.php?id=3");
 
   if(client.available()){
     return readPage();

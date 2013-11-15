@@ -20,7 +20,7 @@
 
 <?php
 	// Create connection
-	$con = mysqli_connect("localhost","root","root","freebusy");
+	$con = mysqli_connect("db149c.pair.com","arthurn_8_r","kK7XtQRY","arthurn_yolo");
 
 	// Check connection
 	if (mysqli_connect_errno($con)) {
@@ -68,7 +68,7 @@
 	}
 	
 	// close the mysql connection now that we're done with it
-	mysql_close($con);	
+	mysqli_close($con);	
 ?>
 	  
 	</div>

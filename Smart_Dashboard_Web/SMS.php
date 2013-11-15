@@ -10,7 +10,7 @@ $client = new Services_Twilio($AccountSid, $AuthToken);
 
  
 // Create connection to the database
-$con = mysqli_connect("localhost","root","root","freebusy");
+$con = mysqli_connect("db149c.pair.com","arthurn_8_r","kK7XtQRY","arthurn_yolo");
 
 
 // Check connection
@@ -20,8 +20,9 @@ if (mysqli_connect_errno($con)) {
 
 // grab the "id" value from the HTTP GET request in order to look up the right person
 $id = htmlspecialchars($_GET['id']);
+
 $idPhone = mysqli_query($con, "SELECT `user_id`, `name`, `busy`, `present`, `needs_break`, `phone` FROM `people`");
-while($row = mysqli_fetch_array($idPhone)) 
+while($row = mysqli_fetch_array($idPhone))
 if ($row['user_id'] == $id)	{
 	  	echo "Sender Information To: ";
 	  	echo $row['name'];
@@ -58,6 +59,8 @@ $result = mysqli_query($con, "SELECT `user_id`, `name`, `busy`, `present`, `need
 // 	  echo $tempPerson;
 // 	  echo "<br>";
 // 	  }
+
+mysqli_close($con);	
 
 $array = array('lastname', 'email', 'phone');
 $comma_separated = implode(",", $peopleLookingtoBreak);

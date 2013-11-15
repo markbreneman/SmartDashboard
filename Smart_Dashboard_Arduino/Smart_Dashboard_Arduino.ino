@@ -22,16 +22,17 @@ int userState = 0;
 //CONFIGURE
 ////////////////////////////////////////////////////////////////////////
 byte server[] = { 
-//  192,168,10,149 }; //ip Address of the server you will connect to
-192,168,1,139};
+//  192,168,1,139 }; //ip Address of the server you will connect to
+66,39,3,7 };
 
 //The location to go to on the server
 //make sure to keep HTTP/1.0 at the end, this is telling it what type of file it is
-String location = "/getstatus.php?id=4 HTTP/1.0";
-String locationSetFree = "/setstatus.php?id=4&busy=0 HTTP/1.0";
-String locationSetBusy = "/setstatus.php?id=4&busy=1 HTTP/1.0";
-String locationSetNoBreak = "/setstatus.php?id=4&needsbreak=0 HTTP/1.0";
-String locationSetNeedBreak = "/setstatus.php?id=4&needsbreak=1 HTTP/1.0";
+String location = "~arthurn/yolo/getstatus.php?id=4 HTTP/1.0";
+String locationSetFree = "~arthurn/yolo/setstatus.php?id=4&busy=0 HTTP/1.0";
+String locationSetBusy = "~arthurn/yolo/setstatus.php?id=4&busy=1 HTTP/1.0";
+String locationSetNoBreak = "~arthurn/yolo/setstatus.php?id=4&needsbreak=0 HTTP/1.0";
+String locationSetNeedBreak = "~arthurn/yolo/setstatus.php?id=4&needsbreak=1 HTTP/1.0";
+String sendSMS = "~arthurn/yolo/sms.php?id=4 HTTP/1.0";
 
 // if need to change the MAC address (Very Rare)
 byte mac[] = { 
@@ -166,9 +167,17 @@ void loop(){
       client.read();
       ////Serial.println("Need Break Set");
       client.stop();
-
-      ////Serial.println(locationSetNeedBreak);
     } 
+    
+    if (client.connect(server, 8888)) {
+      Serial.println("connected to set SendSMS");
+      client.print("GET ");
+      client.println(sendSMS);
+      client.println();
+      client.read();
+      client.stop();
+    } 
+    
     else {
       ////Serial.println("I didn't connect, yo!");
     }
@@ -228,9 +237,9 @@ String readPage(){
         client.flush();
 
         ////Serial.println("disconnecting.");
-        Serial.println(Avail);
-        Serial.println(youHere);
-        Serial.println(needBreak);
+//        Serial.println(Avail);
+//        Serial.println(youHere);
+//        Serial.println(needBreak);
 
         return inString;
 

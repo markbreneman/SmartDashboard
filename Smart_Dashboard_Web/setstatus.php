@@ -20,7 +20,7 @@
 	$statusBreak = htmlspecialchars($_GET['needsbreak']);
 
 	// Create connection
-	$con = mysqli_connect("localhost","root","root","freebusy");
+	$con = mysqli_connect("db149c.pair.com","arthurn_8_w","LVeppYPX","arthurn_yolo");
 
 	// Check connection
 	if (mysqli_connect_errno($con)) {
