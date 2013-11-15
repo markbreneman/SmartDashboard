@@ -21,18 +21,17 @@ int userState = 0;
 ////////////////////////////////////////////////////////////////////////
 //CONFIGURE
 ////////////////////////////////////////////////////////////////////////
-byte server[] = { 
-//  192,168,1,139 }; //ip Address of the server you will connect to
-66,39,3,7 };
+byte server[] = {209,68,4,163};
+  //  192,168,1,139 }; //ip Address of the server you will connect to
 
 //The location to go to on the server
 //make sure to keep HTTP/1.0 at the end, this is telling it what type of file it is
-String location = "~arthurn/yolo/getstatus.php?id=4 HTTP/1.0";
-String locationSetFree = "~arthurn/yolo/setstatus.php?id=4&busy=0 HTTP/1.0";
-String locationSetBusy = "~arthurn/yolo/setstatus.php?id=4&busy=1 HTTP/1.0";
-String locationSetNoBreak = "~arthurn/yolo/setstatus.php?id=4&needsbreak=0 HTTP/1.0";
-String locationSetNeedBreak = "~arthurn/yolo/setstatus.php?id=4&needsbreak=1 HTTP/1.0";
-String sendSMS = "~arthurn/yolo/sms.php?id=4 HTTP/1.0";
+String location = "/~arthurn/yolo/getstatus.php?id=4 HTTP/1.0";
+String locationSetFree = "/~arthurn/yolo/setstatus.php?id=4&busy=0 HTTP/1.0";
+String locationSetBusy = "/~arthurn/yolo/setstatus.php?id=4&busy=1 HTTP/1.0";
+String locationSetNoBreak = "/~arthurn/yolo/setstatus.php?id=4&needsbreak=0 HTTP/1.0";
+String locationSetNeedBreak = "/~arthurn/yolo/setstatus.php?id=4&needsbreak=1 HTTP/1.0";
+String sendSMS = "/~arthurn/yolo/sms.php?id=4 HTTP/1.0";
 
 // if need to change the MAC address (Very Rare)
 byte mac[] = { 
@@ -60,8 +59,8 @@ void loop(){
   buttonStateBusy = digitalRead(buttonBusy);
   buttonStateAvail = digitalRead(buttonAvail);
   buttonStateNeedBreak = digitalRead(buttonNeedBreak);
-  
-//  Serial.println(buttonStateBusy);
+
+  //  Serial.println(buttonStateBusy);
 
   String pageValue = connectAndRead(); //connect to the server and read the output
 
@@ -89,7 +88,7 @@ void loop(){
   }
 
   if (buttonStateAvail == HIGH) {     
-    if (client.connect(server, 8888)) {
+    if (client.connect(server, 80)) {
       Serial.println("connected to no break");
       client.print("GET ");
       client.println(locationSetFree);
@@ -106,7 +105,7 @@ void loop(){
   } 
 
   if (buttonStateAvail == HIGH) {     
-    if (client.connect(server, 8888)) {
+    if (client.connect(server, 80)) {
       Serial.println("connected to set break");
       client.print("GET ");
       client.println(locationSetNoBreak);
@@ -125,7 +124,7 @@ void loop(){
   } 
 
   if (buttonStateBusy == HIGH) {     
-    if (client.connect(server, 8888)) {
+    if (client.connect(server, 80)) {
       Serial.println("connected to set busy");
       client.print("GET ");
       client.println(locationSetBusy);
@@ -137,12 +136,12 @@ void loop(){
       ////Serial.println(locationSetBusy);
     } 
     else {
-    Serial.println("I didn't connect, yo!");
+      Serial.println("I didn't connect, yo!");
     }
   }
 
   if (buttonStateBusy == HIGH) {     
-    if (client.connect(server, 8888)) {
+    if (client.connect(server, 80)) {
       Serial.println("connected to set busy");
       client.print("GET ");
       client.println(locationSetNoBreak);
@@ -159,7 +158,7 @@ void loop(){
   }
 
   if (buttonStateNeedBreak == HIGH) {     
-    if (client.connect(server, 8888)) {
+    if (client.connect(server, 80)) {
       Serial.println("connected to set Need Break");
       client.print("GET ");
       client.println(locationSetNeedBreak);
@@ -168,8 +167,8 @@ void loop(){
       ////Serial.println("Need Break Set");
       client.stop();
     } 
-    
-    if (client.connect(server, 8888)) {
+
+    if (client.connect(server, 80)) {
       Serial.println("connected to set SendSMS");
       client.print("GET ");
       client.println(sendSMS);
@@ -177,7 +176,7 @@ void loop(){
       client.read();
       client.stop();
     } 
-    
+
     else {
       ////Serial.println("I didn't connect, yo!");
     }
@@ -191,8 +190,8 @@ String connectAndRead(){
   Serial.println("connecting...");
 
   //port 80 is typical of a www page
-  if (client.connect(server, 8888)) {
-//  Serial.println("connected");
+  if (client.connect(server, 80)) {
+    Serial.println("connected");
     client.print("GET ");
     client.println(location);
     client.println();
@@ -215,6 +214,7 @@ String readPage(){
   while(true){
     if (client.available()) {
       char c = client.read();
+     
 
       if (c == '<' ) { //'<' is our begining character
         startRead = true; //Ready to start reading the part 
@@ -236,10 +236,10 @@ String readPage(){
         client.stop();
         client.flush();
 
-        ////Serial.println("disconnecting.");
-//        Serial.println(Avail);
-//        Serial.println(youHere);
-//        Serial.println(needBreak);
+        Serial.println("disconnecting.");
+        Serial.println(Avail);
+        Serial.println(youHere);
+        Serial.println(needBreak);
 
         return inString;
 
@@ -261,5 +261,6 @@ void setColor(int red, int green, int blue)
 
 
 
- 
+
+
 
